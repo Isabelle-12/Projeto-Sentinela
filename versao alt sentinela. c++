@@ -1,0 +1,76 @@
+#include <WiFi.h>
+#include <WebServer.h>
+#include <ESP32Servo.h>
+
+const int pinoMQ2 = 34;
+const int pinoBuzzer = 5;
+const int pinoServo = 13;
+
+Servo meuServo;
+WebServer server(80);
+
+// Variável volátil para ser acessada por ambos os núcleos
+volatile int nivelGas = 0;
+volatile bool alertaAtivo = false;
+
+// Protótipo da Task de Monitoramento, pode mudar mais pra frente dependendo de como vai ficar o projeto
+void TaskMonitoramento(void * pvParameters);
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(pinoBuzzer, OUTPUT);
+  meuServo.attach(pinoServo);
+  meuServo.write(0);
+
+  WiFi.softAP("Sentinela_ESP32", "12345678");
+  server.on("/", []() {
+    int gasLocal = nivelGas; // Cópia local para thread-safety rápida
+    String html = "<html><meta charset='UTF-8'><body><h1>Status do Sentinela</h1>";
+    html += "<p>Nível de gás: " + String(gasLocal) + "</p>";
+    html += gasLocal > 2000 ? "<h2 style='color:red;'>ALERTA!</h2>" : "<h2 style='color:green;'>Seguro</h2>";
+    html += "</body></html>";
+    server.send(200, "text/html", html);
+  });
+  server.begin();
+
+  // Cria a Task de monitoramento no Core 0 (Prioridade Máxima)
+  xTaskCreatePinnedToCore(
+    TaskMonitoramento,   // Função da tarefa
+    "MonitorGas",        // Nome
+    10000,               // Stack size
+    NULL,                // Parâmetros
+    3,                   // Prioridade (Alta)
+    NULL,                // Handle
+    0                    // Rodar no Core 0
+  );
+}
+
+void loop() {
+  server.handleClient(); // Web server roda no Core 1 
+  delay(1); // Pequeno descanso para o watchdog do Core 1
+}
+
+// "Zero Delay" rodando paralelamente
+void TaskMonitoramento(void * pvParameters) {
+  for (;;) {
+    nivelGas = analogRead(pinoMQ2);
+
+    if (nivelGas > 2000) {
+      if (!alertaAtivo) { // Só executa se o estado mudou
+        digitalWrite(pinoBuzzer, HIGH);
+        meuServo.write(90);
+        alertaAtivo = true;
+        Serial.println("!!! VAZAMENTO DETECTADO !!!");
+      }
+    } else {
+      if (alertaAtivo) {
+        digitalWrite(pinoBuzzer, LOW);
+        meuServo.write(0);
+        alertaAtivo = false;
+        Serial.println("Sistema Normalizado.");
+      }
+    }
+    // Latência mínima de 10ms apenas para não travar o processador
+    vTaskDelay(10 / portTICK_PERIOD_MS); 
+  }
+}

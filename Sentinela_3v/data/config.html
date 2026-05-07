@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela | Configuração</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">SENTINELA<span>IOT</span></span>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/diagnostico.html">Performance</a>
+                <a href="/config.html">Config</a>
+                <a href="/logs.html">Logs</a> 
+                <a href="/sobre.html">Sobre</a> 
+            </div>
+            <div class="nav-status">
+                <span id="wifi-status-icon">●</span>
+                <span id="wifi-status-text">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Configurações de Hardware</h1>
+            <p>Controle manual e ajuste de parâmetros</p>
+        </header>
+
+        <section class="main-grid">
+            <div class="card">
+                <div class="card-header">
+                    <span>Teste da Válvula (Servo)</span>
+                </div>
+                <div class="control-group">
+                    <button onclick="enviarComando('servo/0')" class="btn btn-open">ABRIR (0°)</button>
+                    <button onclick="enviarComando('servo/90')" class="btn btn-close">FECHAR (90°)</button>
+                </div>
+                <p class="sub-text">Use para testar o curso do motor.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span>Sinalizadores e Cargas</span>
+                </div>
+                <div class="control-group">
+                    <button onmousedown="enviarComando('buzzer/on')" onmouseup="enviarComando('buzzer/off')" class="btn btn-warn">TESTAR BUZZER</button>
+                    <button onclick="enviarComando('reset')" class="btn btn-danger">REINICIAR ESP32</button>
+                </div>
+                <p class="sub-text">O buzzer soa enquanto o botão for pressionado.</p>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top: 20px; width: 100%;">
+                <div class="card-header">
+                    <span>Limiares de Segurança (Setpoints)</span>
+                </div>
+                <div class="settings-form">
+                    <div class="input-field">
+                        <label>Limite de Gás (PPM):</label>
+                        <input type="number" id="set-gas" value="200">
+                    </div>
+                    <div class="input-field">
+                        <label>Distância de Presença (cm):</label>
+                        <input type="number" id="set-dist" value="100">
+                    </div>
+                    <button onclick="salvarConfig()" class="btn btn-save">SALVAR PARÂMETROS</button>
+                </div>
+        </section>
+        <section class="card" style="margin-top: 20px; width: 100%;">
+            <div class="card-header">
+                <span>Controle de Tags Autorizadas</span>
+            </div>
+            <div class="rfid-settings">
+                <p class="sub-text">Tags cadastradas que possuem permissão para desligar o alarme:</p>
+                
+                <table class="diag-table">
+                    <thead>
+                        <tr>
+                            <th>UID da Tag</th>
+                            <th>Nome do Operador</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rfid-list">
+                        <tr>
+                            <td><code class="uid-tag">A3 4F D2 11</code></td>
+                            <td><input type="text" class="input-inline" value="Admin - Isabelle"></td>
+                            <td><button class="btn-mini btn-danger">Remover</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="rfid-actions" style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button onclick="modoAprender()" class="btn btn-warn" style="flex: 1;">
+                        <i class="fa-solid fa-plus"></i> CADASTRAR NOVA TAG
+                    </button>
+                    <button onclick="salvarTags()" class="btn btn-save" style="flex: 1;">
+                        GUARDAR ALTERAÇÕES
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/ui.js"></script>
+</body>
+</html>

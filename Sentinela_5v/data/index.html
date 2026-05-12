@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela | Monitoramento</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">SENTINELA<span>IOT</span></span>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/diagnostico.html">Performance</a>
+                <a href="/config.html">Config</a>
+                <a href="/logs.html">Logs</a> 
+                <a href="/sobre.html">Sobre</a> 
+            </div>
+            <div class="nav-status">
+                <span id="wifi-status-icon">●</span>
+                <span id="wifi-status-text">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="alarm-banner" class="alarm-banner hidden">
+            ⚠️ ALERTA: RISCO CRÍTICO DETECTADO!
+        </div>
+
+        <header>
+            <h1>Painel de Monitoramento</h1>
+            <p id="system-date">Status em tempo real</p>
+        </header>
+
+        <section class="main-grid">
+            <div class="card card-main" id="card-gas">
+                <div class="card-header"><span>Concentração de Gás</span></div>
+                <div class="value-container">
+                    <span id="gas-val" class="main-value">0</span>
+                    <span class="unit">PPM</span>
+                </div>
+                <div class="progress-container">
+                    <div id="gas-bar" class="progress-bar"></div>
+                </div>
+                <p id="gas-status" class="status-text">AMBIENTE SEGURO</p>
+            </div>
+
+            <div class="card" id="card-chama">
+                <div class="card-header"><span>Intensidade de Chama</span></div>
+                <div class="value-container">
+                    <span id="flame-val" class="main-value">0</span>
+                    <span class="unit">%</span>
+                </div>
+                <div class="flame-track">
+                    <div id="flame-bar" class="flame-level"></div>
+                </div>
+                <p id="flame-status" class="status-text">AMBIENTE RESFRIADO</p>
+            </div>
+
+            <div class="card" id="card-presenca">
+                <div class="card-header"><span>Monitoramento de Presença</span></div>
+                <div class="presence-visual">
+                    <div id="presence-indicator" class="presence-dot"></div>
+                    <span id="presence-text">SALA VAZIA</span>
+                </div>
+                <div class="distance-info">
+                    Distância atual: <span id="dist-val">0</span> cm
+                </div>
+            </div>
+
+            <div class="card card-servo" id="card-servo">
+                <div class="card-header"><span>Válvula de Segurança</span></div>
+                <div class="servo-visual">
+                    <div id="servo-circle" class="circle circle-open"></div>
+                </div>
+                <div id="servo-badge" class="badge badge-open">ABERTA</div>
+            </div>
+            <div class="card" id="card-rfid">
+                <div class="card-header">
+                    <span>Autorização de Sistema</span>
+                </div>
+                <div class="access-visual">
+                    <div id="rfid-icon-container">
+                        <i class="fa-solid fa-address-card" id="rfid-icon"></i>
+                    </div>
+                    <div class="access-info">
+                        <span id="user-name">SISTEMA AGUARDANDO</span>
+                        <small id="card-uid">APROXIME O CARTÃO MESTRE</small>
+                    </div>
+                </div>
+                <button id="btn-shutdown" class="btn btn-disabled" disabled>
+                    FINALIZAR ALERTA
+                </button>
+            </div>
+        </section>
+    </div>
+    <div id="emergency-overlay" class="emergency-overlay hidden">
+        <div class="emergency-content">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h2>SISTEMA BLOQUEADO</h2>
+            <p>Vazamento ou Fogo detectado! Aproxime um cartão autorizado para rearmar.</p>
+        </div>
+    </div>
+
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/ui.js"></script>
+</body>
+</html>

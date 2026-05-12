@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela | Sobre</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">SENTINELA<span>IOT</span></span>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/diagnostico.html">Performance</a>
+                <a href="/config.html">Config</a>
+                <a href="/logs.html">Logs</a> 
+                <a href="/sobre.html">Sobre</a> 
+            </div>
+            <div class="nav-status">
+                <span id="wifi-status-icon">●</span>
+                <span id="wifi-status-text">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Sobre o Projeto</h1>
+            <p>Sistema Inteligente de Monitoramento e Segurança Ambiental</p>
+        </header>
+
+        <section class="main-grid">
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <span>Equipe de Desenvolvimento</span>
+                </div>
+                <div class="equipe-container">
+                    <div class="membro">
+                        <strong>Integrante 1</strong>
+                        <p>Bruno Rafael Wacherwski</p>
+                        <span class="email">contato@exemplo.com</span>
+                    </div>
+                    <div class="membro">
+                        <strong>Integrante 2</strong>
+                        <p>Isabelle Ribeiro dos Santos</p>
+                        <span class="email">r.isabelle@pucpr.edu.br</span>
+                    </div>
+                    <div class="membro">
+                        <strong>Integrante 3</strong>
+                        <p>Leticia Maria Maia de Andrade Vieira</p>
+                        <span class="email">terceiro@exemplo.com</span>
+                    </div>
+                    <div class="membro">
+                        <strong>Integrante 4</strong>
+                        <p>Paula Carolina Mendes Pontes</p>
+                        <span class="email">quarto@exemplo.com</span>
+                    </div>
+                </div>
+                <div class="universidade-info">
+                    <p><strong>Universidade:</strong> Pontifícia Universidade Católica do Paraná</p>
+                    <p><strong>Disciplina:</strong> Performance em Sistemas Ciberfísicos </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="card" style="margin-top: 20px; width: 100%;">
+            <div class="card-header">
+                <span>Changelog do Sistema (Histórico de Versões)</span>
+            </div>
+            <div class="changelog-list">
+                <div class="version-tag">
+                    <span class="v-num">v1.0.0</span>
+                    <span class="v-date">04/05/2024</span>
+                    <ul>
+                        <li>Implementação de interface multi-página via LittleFS.</li>
+                        <li>Configuração de Wi-Fi e Setpoints dinâmica.</li>
+                        <li>Integração de FreeRTOS para controle do Servo e Sensores.</li>
+                    </ul>
+                </div>
+                <div class="version-tag old">
+                    <span class="v-num">v0.5.0</span>
+                    <span class="v-date">20/04/2024</span>
+                    <ul>
+                        <li>Calibração do sensor MQ-2 e lógica do Ultrassônico.</li>
+                        <li>Criação da API JSON básica no ESP32.</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </section>
+        <div class="repo-container-standalone">
+                <p>O código-fonte completo, esquemáticos e documentação técnica estão disponíveis no GitHub:</p>
+                <a href="https://github.com/seu-usuario/seu-repositorio" target="_blank" class="btn-repo-link">
+                    <i class="fa-brands fa-github"></i> REPOSITÓRIO GITHUB
+                </a>
+            </div>
+    </div>
+</body>
+</html>

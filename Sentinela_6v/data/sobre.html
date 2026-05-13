@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela | Sobre</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">SENTINELA<span>IOT</span></span>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/diagnostico.html">Performance</a>
+                <a href="/config.html">Config</a>
+                <a href="/logs.html">Logs</a> 
+                <a href="/sobre.html">Sobre</a> 
+            </div>
+            <div class="nav-status">
+                <span id="wifi-status-icon">●</span>
+                <span id="wifi-status-text">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Sobre o Projeto</h1>
+            <p>Sistema Inteligente de Monitoramento e Segurança Ambiental</p>
+        </header>
+
+        <section class="main-grid">
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <span>Equipe de Desenvolvimento</span>
+                </div>
+                <div class="equipe-container">
+                    <div class="membro">
+                        <strong>Integrante 1</strong>
+                        <p>Bruno Rafael Wacherwski</p>
+                        <span class="email">contato@exemplo.com</span>
+                    </div>
+                    <div class="membro">
+                        <strong>Integrante 2</strong>
+                        <p>Isabelle Ribeiro dos Santos</p>
+                        <span class="email">r.isabelle@pucpr.edu.br</span>
+                    </div>
+                    <div class="membro">
+                        <strong>Integrante 3</strong>
+                        <p>Leticia Maria Maia de Andrade Vieira</p>
+                        <span class="email">terceiro@exemplo.com</span>
+                    </div>
+                    <div class="membro">
+                        <strong>Integrante 4</strong>
+                        <p>Paula Carolina Mendes Pontes</p>
+                        <span class="email">quarto@exemplo.com</span>
+                    </div>
+                </div>
+                <div class="universidade-info">
+                    <p><strong>Universidade:</strong> Pontifícia Universidade Católica do Paraná</p>
+                    <p><strong>Disciplina:</strong> Performance em Sistemas Ciberfísicos</p>
+                    <p><strong>Professor:</strong> Fábio Bettio</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="card" style="margin-top: 20px; width: 100%;">
+            <div class="card-header">
+                <span>Changelog do Sistema (Histórico de Versões)</span>
+            </div>
+            <div class="changelog-list">
+                <div class="version-tag">
+                    <span class="v-num">v5.0.0</span>
+                    <span class="v-date">11/05/2026</span>
+                    <ul>
+                        <li>Correção da distribuição Dual-Core: tasks críticas (Sensors, Security) movidas para Core 0.</li>
+                        <li>Adição de handles em todas as tasks para controle em tempo de execução.</li>
+                        <li>Finalização do JavaScript de todas as páginas da interface web.</li>
+                    </ul>
+                </div>
+                <div class="version-tag old">
+                    <span class="v-num">v4.0.0</span>
+                    <span class="v-date">11/05/2026</span>
+                    <ul>
+                        <li>Migração do banco de dados de MySQL externo para SQLite local via LittleFS.</li>
+                        <li>Correção do Watchdog Timer para ESP32 SDK 3.x (esp_task_wdt_config_t).</li>
+                        <li>Implementação de filtro anti-queda elétrica no sensor MQ-2.</li>
+                        <li>Debounce de software (2 leituras consecutivas) para evitar falsos positivos.</li>
+                        <li>Deadzone de 2s após desligamento do alarme para evitar repique elétrico.</li>
+                        <li>Acionamento escalonado (500ms entre buzzer e relé) para evitar brownout.</li>
+                        <li>Variáveis volatile para sincronização em tempo real entre tasks.</li>
+                        <li>Alteração do Partition Scheme para Huge APP (3MB).</li>
+                    </ul>
+                </div>
+                <div class="version-tag old">
+                    <span class="v-num">v3.0.0</span>
+                    <span class="v-date">07/05/2026</span>
+                    <ul>
+                        <li>Implementação de banco de dados MySQL com taskMySQL no Core 0.</li>
+                        <li>Adição de Watchdog Timer (WDT) com timeout de 5 segundos.</li>
+                        <li>Comunicação entre tasks via fila (QueueHandle_t).</li>
+                        <li>Ajuste de prioridades: Security(P5), Sensors(P4), Web(P3), Perf(P2), MySQL(P1).</li>
+                        <li>Novos endpoints de API: /api/status e /api/performance.</li>
+                    </ul>
+                </div>
+                <div class="version-tag old">
+                    <span class="v-num">v2.0.0</span>
+                    <span class="v-date">06/05/2026</span>
+                    <ul>
+                        <li>Integração completa do SPIFFS com servidor de arquivos e MIME types.</li>
+                        <li>API JSON em /api/data com gasPPM, distancia e alarme.</li>
+                        <li>Leitura funcional do HC-SR04 via pulseIn.</li>
+                        <li>Retenção de segurança de 10s (MIN_TIME_ACTIVE) no alarme.</li>
+                        <li>Filtro de valores espúrios (>4000) no ADC do MQ-2.</li>
+                        <li>Divisor de tensão resistivo para proteção do GPIO 34.</li>
+                        <li>Interface web com 5 páginas: Dashboard, Performance, Config, Logs e Sobre.</li>
+                    </ul>
+                </div>
+                <div class="version-tag old">
+                    <span class="v-num">v1.0.0</span>
+                    <span class="v-date">29/04/2026</span>
+                    <ul>
+                        <li>Estrutura base do firmware com 5 tasks FreeRTOS.</li>
+                        <li>Leitura do sensor MQ-2 e acionamento de buzzer, relé e servo.</li>
+                        <li>Configuração do Wi-Fi em modo Access Point (Sentinela_ESP32).</li>
+                        <li>Servidor web básico com endpoint raiz.</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </section>
+        <div class="repo-container-standalone">
+                <p>O código-fonte completo, esquemáticos e documentação técnica estão disponíveis no GitHub:</p>
+                <a href= "https://github.com/Isabelle-12/Projeto-Sentinela.git" target="_blank" class="btn-repo-link">
+                    <i class="fa-brands fa-github"></i> REPOSITÓRIO GITHUB
+                </a>
+            </div>
+    </div>
+</body>
+</html>

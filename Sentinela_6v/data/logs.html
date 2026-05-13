@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela | Logs</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">SENTINELA<span>IOT</span></span>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/diagnostico.html">Performance</a>
+                <a href="/config.html">Config</a>
+                <a href="/logs.html">Logs</a> 
+                <a href="/sobre.html">Sobre</a> 
+            </div>
+            <div class="nav-status">
+                <span id="wifi-status-icon">●</span>
+                <span id="wifi-status-text">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header-logs">
+            <div>
+                <h1>Registros do Sistema</h1>
+                <p>Histórico de eventos e alertas em tempo real</p>
+            </div>
+            <div class="actions">
+                <button onclick="exportarLogs()" class="btn btn-save">
+                    EXPORTAR .TXT
+                </button>
+                <button onclick="limparLogsLocal()" class="btn btn-danger">
+                    LIMPAR TELA
+                </button>
+            </div>
+        </header>
+
+        <div class="filter-bar">
+            <span>Filtrar por:</span>
+            <button class="filter-btn active" data-type="all">Todos</button>
+            <button class="filter-btn" data-type="info">Info</button>
+            <button class="filter-btn" data-type="warn">Warning</button>
+            <button class="filter-btn" data-type="error">Error</button>
+        </div>
+
+        <section class="card card-log">
+            <div id="log-console" class="log-console">
+                <div class="log-entry log-info">
+                    <span class="log-time">[00:00:01]</span>
+                    <span class="log-msg">Sistema Sentinela iniciado. LittleFS montado.</span>
+                </div>
+                <div class="log-entry log-warn">
+                    <span class="log-time">[00:00:05]</span>
+                    <span class="log-msg">Aquecendo sensor MQ-2 (Aguarde 60s).</span>
+                </div>
+            </div>
+        </section>
+
+        <p class="sub-text" style="margin-top: 10px;">* Os logs são mantidos na memória volátil e limpos ao reiniciar o ESP32.</p>
+    </div>
+
+    
+    <script src="/assets/js/logs.js"></script>
+</body>
+</html>

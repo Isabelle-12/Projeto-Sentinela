@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinela | Diagnóstico</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="logo">SENTINELA<span>IOT</span></span>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/diagnostico.html">Performance</a>
+                <a href="/config.html">Config</a>
+                <a href="/logs.html">Logs</a> 
+                <a href="/sobre.html">Sobre</a> 
+            </div>
+            <div class="nav-status">
+                <span id="wifi-status-icon">●</span>
+                <span id="wifi-status-text">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Diagnóstico do Sistema</h1>
+            <p>Métricas de hardware</p>
+        </header>
+
+        <section class="main-grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <span>Recursos do Microcontrolador</span>
+                </div>
+                <div class="debug-info">
+                    <p>Memória RAM Livre: <strong id="heap-val">--</strong> bytes</p>
+                    <p>Uso de CPU (Core 0/1): <strong>Ativo</strong></p>
+                    <p>Uso do Sistema de Arquivos: <strong>LittleFS</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top: 20px; width: 100%;">
+            <div class="card-header">
+                <span>Tempo de Execução por Task (ms)</span>
+            </div>
+            <table class="diag-table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Status</th>
+                        <th>Latência</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Leitura Sensores</td><td>OK</td><td id="t-sensor">--</td></tr>
+                    <tr><td>Lógica de Segurança</td><td>OK</td><td id="t-logic">--</td></tr>
+                    <tr><td>Servidor Web</td><td>OK</td><td id="t-web">--</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section  style="margin-top: 20px; width: 100%;">
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header">
+                    <span>Histórico de Performance (Série Temporal)</span>
+                </div>
+                <div class="chart-container" style="position: relative; height:300px;">
+                    <canvas id="perfChart"></canvas>
+                </div>
+            </div>
+        </section>
+     
+    </div>
+
+    
+    <script src="/assets/js/diagnostico.js"></script>
+</body>
+</html>
